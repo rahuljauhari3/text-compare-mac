@@ -1,0 +1,15 @@
+{
+  "name": "text-compare-mac",
+  "version": "0.1.0",
+  "description": "Local macOS app for comparing two text files with a modern, interactive UI and dark/light mode",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-packager": "^17.1.2"
+  }
+}

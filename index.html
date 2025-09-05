@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Text Compare</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title">Text Compare</div>
+    <div class="header-right">
+      <div class="options-control" role="group" aria-label="Diff options">
+        <label class="chk"><input type="checkbox" id="opt-ignore-ws"> Ignore whitespace</label>
+        <label class="chk"><input type="checkbox" id="opt-ignore-case"> Ignore case</label>
+        <div class="segmented small" id="inline-mode">
+          <input type="radio" name="inline" id="inline-word" value="word" checked>
+          <label for="inline-word">Words</label>
+          <input type="radio" name="inline" id="inline-char" value="char">
+          <label for="inline-char">Chars</label>
+        </div>
+      </div>
+      <div class="theme-control" role="group" aria-label="Theme">
+        <div class="segmented" id="theme-segmented">
+          <input type="radio" name="theme" id="theme-system" value="system" checked>
+          <label for="theme-system">System</label>
+          <input type="radio" name="theme" id="theme-light" value="light">
+          <label for="theme-light">Light</label>
+          <input type="radio" name="theme" id="theme-dark" value="dark">
+          <label for="theme-dark">Dark</label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="controls">
+    <div class="left-controls">
+      <button id="pick-left" class="btn">Open Left…</button>
+      <div class="segmented small" id="mode-left">
+        <input type="radio" name="mode-left" id="mode-left-file" value="file" checked>
+        <label for="mode-left-file">File</label>
+        <input type="radio" name="mode-left" id="mode-left-text" value="text">
+        <label for="mode-left-text">Text</label>
+      </div>
+      <div class="file-path" id="left-path"></div>
+    </div>
+    <div class="right-controls">
+      <button id="pick-right" class="btn">Open Right…</button>
+      <div class="segmented small" id="mode-right">
+        <input type="radio" name="mode-right" id="mode-right-file" value="file" checked>
+        <label for="mode-right-file">File</label>
+        <input type="radio" name="mode-right" id="mode-right-text" value="text">
+        <label for="mode-right-text">Text</label>
+      </div>
+      <div class="file-path" id="right-path"></div>
+    </div>
+  </section>
+
+  <section class="dropzones">
+    <div class="side-panel" id="left-panel">
+      <div class="dropzone" id="left-drop" tabindex="0">
+        <div class="dz-title">Drop left file here or click Open Left</div>
+      </div>
+      <textarea id="left-text" class="text-input" placeholder="Type left text here..."></textarea>
+    </div>
+    <div class="side-panel" id="right-panel">
+      <div class="dropzone" id="right-drop" tabindex="0">
+        <div class="dz-title">Drop right file here or click Open Right</div>
+      </div>
+      <textarea id="right-text" class="text-input" placeholder="Type right text here..."></textarea>
+    </div>
+  </section>
+
+  <main class="diff-container">
+    <div id="diff" class="diff-grid">
+      <div class="placeholder">Choose or drop two files to see differences</div>
+    </div>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
+
