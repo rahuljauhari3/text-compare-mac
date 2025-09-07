@@ -20,22 +20,37 @@ npm start
 
 ## Build (.app)
 
-Quick build on macOS
+Step-by-step on macOS
+1) Clean previous builds (optional)
 ```bash
-# Build and open for your current CPU (arm64 on Apple Silicon, x64 on Intel)
-npx electron-packager . "Text Compare" --platform=darwin --arch=$(node -p "process.arch") --out=out --overwrite && \
+rm -rf out
+```
+2) Package the app for your current CPU
+```bash
+npx electron-packager . "Text Compare" --platform=darwin --arch=$(node -p "process.arch") --out=out --overwrite
+```
+3) Open the built app
+```bash
 open "out/Text Compare-darwin-$(node -p "process.arch")/Text Compare.app"
 ```
 
-Need a specific CPU?
+Where is the .app?
+- out/Text Compare-darwin-$(node -p "process.arch")/Text Compare.app
+
+Build for a specific CPU (optional)
 - Apple Silicon (arm64):
-  ```bash
-  npx electron-packager . "Text Compare" --platform=darwin --arch=arm64 --out=out --overwrite
-  ```
+```bash
+npx electron-packager . "Text Compare" --platform=darwin --arch=arm64 --out=out --overwrite
+```
 - Intel (x64):
-  ```bash
-  npx electron-packager . "Text Compare" --platform=darwin --arch=x64 --out=out --overwrite
-  ```
+```bash
+npx electron-packager . "Text Compare" --platform=darwin --arch=x64 --out=out --overwrite
+```
+
+Clean up (remove build artifacts)
+```bash
+rm -rf out
+```
 
 ## Use
 
