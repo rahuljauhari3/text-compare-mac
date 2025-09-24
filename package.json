@@ -1,12 +1,16 @@
 {
-  "name": "text-compare-mac",
+  "name": "text-compare",
   "version": "0.1.0",
-  "description": "Local macOS app for comparing two text files with a modern, interactive UI and dark/light mode",
+  "description": "Cross-platform desktop app for comparing two text files with a modern, interactive UI and dark/light mode",
   "main": "main.js",
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build:mac": "npx electron-packager . \"Text Compare\" --platform=darwin --arch=arm64,x64 --out=out --overwrite",
+    "build:win": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=x64,ia32 --out=out --overwrite",
+    "build:win64": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=x64 --out=out --overwrite",
+    "build:win32": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=ia32 --out=out --overwrite"
   },
   "devDependencies": {
     "electron": "^30.0.0",

@@ -5,17 +5,15 @@ const path = require('path');
 const fs = require('fs');
 
 const isMac = process.platform === 'darwin';
+const isWin = process.platform === 'win32';
 
 function createWindow() {
-  const win = new BrowserWindow({
+  const windowOptions = {
     width: 1200,
     height: 800,
     minWidth: 920,
     minHeight: 600,
     title: 'Text Compare',
-    trafficLightPosition: { x: 12, y: 12 },
-    vibrancy: isMac ? 'under-window' : undefined,
-    visualEffectState: 'active',
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#1f1f1f' : '#ffffff',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -24,7 +22,16 @@ function createWindow() {
       sandbox: false,
       devTools: true
     }
-  });
+  };
+
+  // macOS-specific options
+  if (isMac) {
+    windowOptions.trafficLightPosition = { x: 12, y: 12 };
+    windowOptions.vibrancy = 'under-window';
+    windowOptions.visualEffectState = 'active';
+  }
+
+  const win = new BrowserWindow(windowOptions);
 
   win.loadFile(path.join(__dirname, 'index.html'));
 }
@@ -38,6 +45,8 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
+  // On macOS, keep app running even when all windows are closed
+  // On Windows and Linux, quit the app
   if (!isMac) app.quit();
 });
 
