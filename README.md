@@ -59,7 +59,7 @@ Clean up (remove build artifacts)
 rm -rf out
 ```
 
-### Windows (.exe)
+### Windows (Installer)
 
 #### Method 1: Using the batch script (Recommended)
 
@@ -71,50 +71,63 @@ build-windows.bat
 This will automatically:
 - Check for Node.js and npm
 - Install dependencies
-- Build both 64-bit and 32-bit versions
-- Place executables in the `out` folder
+- Build Windows installer (.exe)
+- Place installer in the `dist` folder
 
 #### Method 2: Using npm scripts
 
-Build for all Windows architectures:
+Build Windows installer:
 ```cmd
-npm run build:win
+npm run dist:win
 ```
 
-Build for 64-bit Windows only:
+Build for all platforms:
 ```cmd
-npm run build:win64
-```
-
-Build for 32-bit Windows only:
-```cmd
-npm run build:win32
+npm run dist
 ```
 
 #### Method 3: Manual build
 
-1. Clean previous builds (optional)
+1. Install dependencies
 ```cmd
-rmdir /s /q out
+npm install
 ```
 
-2. Build for 64-bit Windows
+2. Build Windows installer
 ```cmd
-npx electron-packager . "Text Compare" --platform=win32 --arch=x64 --out=out --overwrite
+npx electron-builder --win
 ```
 
-3. Build for 32-bit Windows
+#### Installation
+
+1. Navigate to the `dist` folder after building
+2. Run `Text Compare Setup.exe`
+3. Follow the installation wizard
+4. The app will be installed and appear in:
+   - Start Menu
+   - Desktop shortcut (if selected)
+   - Add or Remove Programs
+
+#### Legacy Method (Portable executable)
+
+For portable executables without installation:
+
 ```cmd
-npx electron-packager . "Text Compare" --platform=win32 --arch=ia32 --out=out --overwrite
+# 64-bit portable
+npm run build:win64
+
+# 32-bit portable  
+npm run build:win32
 ```
 
-Where is the .exe?
+Portable executables location:
 - 64-bit: `out\Text Compare-win32-x64\Text Compare.exe`
 - 32-bit: `out\Text Compare-win32-ia32\Text Compare.exe`
 
 Clean up (remove build artifacts)
 ```cmd
 rmdir /s /q out
+rmdir /s /q dist
 ```
 
 ## Use

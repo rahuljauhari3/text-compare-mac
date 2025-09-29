@@ -3,17 +3,77 @@
   "version": "0.1.0",
   "description": "Cross-platform desktop app for comparing two text files with a modern, interactive UI and dark/light mode",
   "main": "main.js",
-  "author": "",
+  "author": "Your Name",
   "license": "MIT",
+  "homepage": "https://github.com/rahuljauhari3/text-compare-mac",
   "scripts": {
     "start": "electron .",
     "build:mac": "npx electron-packager . \"Text Compare\" --platform=darwin --arch=arm64,x64 --out=out --overwrite",
     "build:win": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=x64,ia32 --out=out --overwrite",
     "build:win64": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=x64 --out=out --overwrite",
-    "build:win32": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=ia32 --out=out --overwrite"
+    "build:win32": "npx electron-packager . \"Text Compare\" --platform=win32 --arch=ia32 --out=out --overwrite",
+    "dist": "npx electron-builder",
+    "dist:win": "npx electron-builder --win",
+    "dist:mac": "npx electron-builder --mac",
+    "pack": "npx electron-builder --dir"
   },
   "devDependencies": {
     "electron": "^30.0.0",
-    "electron-packager": "^17.1.2"
+    "electron-packager": "^17.1.2",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.textcompare.app",
+    "productName": "Text Compare",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/.cache",
+      "!out",
+      "!dist"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64", "x64"]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        }
+      ],
+      "publisherName": "Text Compare",
+      "verifyUpdateCodeSignature": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "menuCategory": true,
+      "shortcutName": "Text Compare",
+      "uninstallDisplayName": "Text Compare"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        }
+      ],
+      "category": "Utility"
+    }
   }
 }

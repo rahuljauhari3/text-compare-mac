@@ -35,24 +35,19 @@ echo.
 
 REM Clean previous builds
 if exist out (
-    echo Cleaning previous builds...
+    echo Cleaning previous builds (out)...
     rmdir /s /q out
 )
-
-REM Build for both 64-bit and 32-bit
-echo Building 64-bit version...
-call npx electron-packager . "Text Compare" --platform=win32 --arch=x64 --out=out --overwrite
-if %ERRORLEVEL% NEQ 0 (
-    echo ERROR: Failed to build 64-bit version.
-    pause
-    exit /b 1
+if exist dist (
+    echo Cleaning previous builds (dist)...
+    rmdir /s /q dist
 )
 
-echo.
-echo Building 32-bit version...
-call npx electron-packager . "Text Compare" --platform=win32 --arch=ia32 --out=out --overwrite
+REM Build Windows installer using electron-builder
+echo Building Windows installer...
+call npx electron-builder --win
 if %ERRORLEVEL% NEQ 0 (
-    echo ERROR: Failed to build 32-bit version.
+    echo ERROR: Failed to build Windows installer.
     pause
     exit /b 1
 )
@@ -62,8 +57,12 @@ echo ========================================
 echo Build completed successfully!
 echo ========================================
 echo.
-echo Executable locations:
-echo   64-bit: out\Text Compare-win32-x64\Text Compare.exe
-echo   32-bit: out\Text Compare-win32-ia32\Text Compare.exe
+echo Windows installer created in: dist\
+echo.
+echo To install:
+echo 1. Navigate to the 'dist' folder
+echo 2. Run the 'Text Compare Setup.exe' file
+echo 3. Follow the installation wizard
+echo 4. The app will appear in Start Menu and Add/Remove Programs
 echo.
 pause
